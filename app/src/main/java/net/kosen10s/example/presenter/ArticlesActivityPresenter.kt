@@ -5,9 +5,7 @@ import net.kosen10s.example.datasource.ArticlesDataSource
 import net.kosen10s.example.entity.Article
 import net.kosen10s.example.view.screen.articles.ArticlesActivity
 
-class ArticlesActivityPresenter constructor(
-        activity: ArticlesActivity
-) {
+class ArticlesActivityPresenter {
 
     private val articlesDataSource = ArticlesDataSource()
 

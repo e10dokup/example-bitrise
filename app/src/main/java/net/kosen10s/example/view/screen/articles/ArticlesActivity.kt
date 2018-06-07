@@ -14,7 +14,7 @@ import net.kosen10s.example.presenter.ArticlesActivityPresenter
 class ArticlesActivity: AppCompatActivity() {
 
     private val presenter by lazy {
-        ArticlesActivityPresenter(this)
+        ArticlesActivityPresenter()
     }
 
     private val adapter = GroupAdapter<ViewHolder>().apply {

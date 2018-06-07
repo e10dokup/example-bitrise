@@ -10,7 +10,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class ArticlesDataSource {
+class ArticlesDataSource() {
 
     companion object {
         private var clientInstance: HackerNewsService? = null
@@ -27,8 +27,14 @@ class ArticlesDataSource {
         }
     }
 
+    private var service = getClientInstance()
+
+    constructor(service: HackerNewsService) : this() {
+        this.service = service
+    }
+
     fun getTopHeadlines(onSuccess: (List<Article>) -> Unit, onError: (Throwable?) -> Unit) {
-        val call = getClientInstance().getTopHeadlines("hacker-news", "c9aef6a9a28744078d0f7a051523d549")
+        val call = service.getTopHeadlines("hacker-news", "c9aef6a9a28744078d0f7a051523d549")
         call.enqueue(object : Callback<TopHeadlines> {
             override fun onFailure(call: Call<TopHeadlines>?, t: Throwable?) {
                 onError.invoke(t)
