@@ -1,6 +1,5 @@
 package net.kosen10s.example.datasource
 
-import android.util.Log
 import net.kosen10s.example.TestUtil
 import net.kosen10s.example.service.HackerNewsService
 import okhttp3.OkHttpClient
@@ -8,13 +7,10 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-
-import org.mockito.Mockito
-
-import org.assertj.core.api.Assertions.assertThat
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.CountDownLatch
@@ -25,7 +21,6 @@ class ArticlesDataSourceTest {
     private val mockWebServer = MockWebServer()
     private lateinit var dataSource: ArticlesDataSource
     private lateinit var latch: CountDownLatch
-
     @Before
     fun setUp() {
         val dispatcher = object : Dispatcher() {

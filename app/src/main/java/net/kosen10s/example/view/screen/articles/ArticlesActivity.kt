@@ -1,6 +1,7 @@
 package net.kosen10s.example.view.screen.articles
 
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -8,10 +9,11 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_articles.*
 import net.kosen10s.example.R
+import net.kosen10s.example.common.SimpleIdlingResource
 import net.kosen10s.example.contracts.ArticlesContract
 import net.kosen10s.example.entity.Article
-import net.kosen10s.example.view.item.ArticleItem
 import net.kosen10s.example.presenter.ArticlesActivityPresenter
+import net.kosen10s.example.view.item.ArticleItem
 
 class ArticlesActivity: AppCompatActivity(), ArticlesContract.View {
 
@@ -26,6 +28,9 @@ class ArticlesActivity: AppCompatActivity(), ArticlesContract.View {
         })
     }
 
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val loadingIdlingResource : SimpleIdlingResource = SimpleIdlingResource("IdlingResourceViewModelLoading")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +43,7 @@ class ArticlesActivity: AppCompatActivity(), ArticlesContract.View {
 
     override fun onResume() {
         super.onResume()
-
+        loadingIdlingResource.isIdle = false
         presenter.getArticles()
     }
 
@@ -46,5 +51,6 @@ class ArticlesActivity: AppCompatActivity(), ArticlesContract.View {
         articles.forEach {
             adapter.add(ArticleItem(it))
         }
+        loadingIdlingResource.isIdle = true
     }
 }

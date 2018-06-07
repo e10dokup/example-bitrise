@@ -1,6 +1,5 @@
 package net.kosen10s.example.presenter
 
-import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.verify
 import net.kosen10s.example.contracts.ArticlesContract
@@ -8,12 +7,8 @@ import net.kosen10s.example.datasource.ArticlesDataSource
 import net.kosen10s.example.entity.Article
 import org.junit.Before
 import org.junit.Test
-
-import org.junit.Assert.*
-import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.invocation.InvocationOnMock
-import org.mockito.stubbing.Answer
+
 
 class ArticlesActivityPresenterTest {
 
