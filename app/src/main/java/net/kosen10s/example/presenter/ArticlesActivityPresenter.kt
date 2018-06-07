@@ -1,17 +1,23 @@
 package net.kosen10s.example.presenter
 
 import android.util.Log
+import net.kosen10s.example.contracts.ArticlesContract
 import net.kosen10s.example.datasource.ArticlesDataSource
 import net.kosen10s.example.entity.Article
 import net.kosen10s.example.view.screen.articles.ArticlesActivity
 
-class ArticlesActivityPresenter {
+class ArticlesActivityPresenter() {
 
-    private val articlesDataSource = ArticlesDataSource()
+    private var articlesDataSource = ArticlesDataSource()
+    var view: ArticlesContract.View? = null
 
-    fun getArticles(onSuccess: (List<Article>) -> Unit) {
+    constructor(articlesDataSource: ArticlesDataSource): this() {
+        this.articlesDataSource = articlesDataSource
+    }
+
+    fun getArticles() {
         articlesDataSource.getTopHeadlines(onSuccess = {
-            onSuccess.invoke(it)
+            view?.onGetArticles(it)
         }, onError = {
             Log.d("getArticles", it?.message)
         })

@@ -8,10 +8,12 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_articles.*
 import net.kosen10s.example.R
+import net.kosen10s.example.contracts.ArticlesContract
+import net.kosen10s.example.entity.Article
 import net.kosen10s.example.view.item.ArticleItem
 import net.kosen10s.example.presenter.ArticlesActivityPresenter
 
-class ArticlesActivity: AppCompatActivity() {
+class ArticlesActivity: AppCompatActivity(), ArticlesContract.View {
 
     private val presenter by lazy {
         ArticlesActivityPresenter()
@@ -30,18 +32,19 @@ class ArticlesActivity: AppCompatActivity() {
         setContentView(R.layout.activity_articles)
         articles_recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         articles_recycler.adapter = adapter
+
+        presenter.view = this
     }
 
     override fun onResume() {
         super.onResume()
 
-        presenter.getArticles {
-            it.forEach {
-                adapter.add(ArticleItem(it))
-            }
-
-        }
+        presenter.getArticles()
     }
 
-
+    override fun onGetArticles(articles: List<Article>) {
+        articles.forEach {
+            adapter.add(ArticleItem(it))
+        }
+    }
 }
