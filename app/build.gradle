@@ -69,22 +69,6 @@ android {
         }
     }
 
-    flavorDimensions "develop", "staging", "production"
-    productFlavors {
-        develop {
-            dimension "develop"
-            applicationId "${PACKAGE_NAME}.develop"
-        }
-        staging {
-            dimension "staging"
-            applicationId "${PACKAGE_NAME}.staging"
-        }
-        production {
-            dimension "production"
-            applicationId PACKAGE_NAME
-        }
-    }
-
     dataBinding {
         enabled = true
     }

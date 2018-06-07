@@ -38,7 +38,7 @@ class ArticlesActivityTest {
     @Test
     fun loadArticlesTest() {
         Espresso.onView(ViewMatchers.withId(R.id.articles_recycler)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.articles_recycler)). check { view, _ ->
+        Espresso.onView(ViewMatchers.withId(R.id.articles_recycler)).check { view, _ ->
             val recyclerView = view as RecyclerView
             assertThat(recyclerView.childCount).isGreaterThan(1)
             assertThat(recyclerView.adapter.itemCount).isGreaterThan(1)
